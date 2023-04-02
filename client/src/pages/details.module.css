@@ -1,0 +1,42 @@
+.container {
+    width: 100%;
+
+}
+
+.studentContainer {
+    display: grid;
+    grid-template-columns: auto auto auto;
+    margin: 1.2rem 0 0 1.2rem;
+    gap: 10px;
+}
+
+.filterButtons {
+    display: flex;
+    margin: 20px;
+    padding: 5px;
+}
+
+.warning {
+    font-size: 35px;
+    text-align: center;
+}
+
+.suggestion {
+    text-align: center;
+}
+
+@media (max-width: 1100px) {
+    .studentContainer {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        row-gap: 3rem;
+    }
+}
+
+@media (max-width: 700px) {
+    .studentContainer {
+        display: grid;
+        grid-template-columns: repeat(1, minmax(0, 1fr));
+        row-gap: 3rem;
+    }
+}

@@ -1,0 +1,67 @@
+POST http://localhost:5000/mentors HTTP/1.1
+Content-Type: application/json
+
+{
+    "name": "adfad",
+    "profession": "adfadf",
+    "mentorID": "8",
+    "mentorEmailID": "999",
+    "assignedStudents": [],
+    "submitted": false
+}
+
+###
+POST http://localhost:5000/students HTTP/1.1
+Content-Type: application/json
+
+{
+    "name": "vai16",
+    "studentID": "20BCS59216",
+    "studentEmailID": "5416",
+    "physicsMarks": 50,
+    "chemistryMarks": 50,
+    "mathsMarks": 50,
+    "assigned": false,
+    "submitted": false
+}
+
+###
+POST http://localhost:5000/students/update HTTP/1.1
+Content-Type: application/json
+
+{
+    "name": "vai1",
+    "studentID": "20BCS5917",
+    "studentEmailID": "5",
+    "physicsMarks": 500,
+    "chemistryMarks": 500,
+    "mathsMarks": 500,
+    "assigned": false,
+    "submitted": false
+}
+
+###
+
+POST http://localhost:5000/mentors/assign HTTP/1.1
+Content-Type: application/json
+
+{
+    "mentorID": "899",
+    "studentID": "20BCS5921"
+}
+###
+POST http://localhost:5000/mentors/submit HTTP/1.1
+Content-Type: application/json
+
+{
+    "mentorID": "5000"
+}
+
+###
+POST http://localhost:5000/mentors/remove HTTP/1.1
+Content-Type: application/json
+
+{
+    "mentorID": "899",
+    "studentID": "20BCS5921"
+}
