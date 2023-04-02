@@ -1,10 +1,6 @@
 import React, { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import StudentCard from "../components/StudentCard";
-import {
-  getAssignedStudents,
-  getRemainingStudents,
-} from "../store/studentSlice";
 import { submitMentor } from "../api";
 import { useNavigate } from "react-router-dom";
 import styles from "./details.module.css";
@@ -12,36 +8,41 @@ import styles from "./details.module.css";
 const Details = () => {
   const navigate = useNavigate();
 
+  //our current selected mentor that we are getting from the redux store
   const selectedMentor = useSelector((state) => state.mentors.currentMentor);
-  console.log(selectedMentor);
   const allStudents = useSelector((state) => state.students.totalStudents);
+
+  //toggles for showing studensts based on chosen filter
   const [showAssigned, setShowAssigned] = useState(false);
   const [showUnassigned, setShowUnassigned] = useState(false);
   const [isFiltered, setIsFiltered] = useState(false);
 
+  //getting all the students that are assigned from redux store
   const assignedStudents = useSelector(
     (state) => state.students.assignedStudents
   );
+  //getting all the students that are not assigned from redux store
   const remainingStudents = useSelector(
     (state) => state.students.remainingStudents
   );
-  console.log("assigned students are");
-  console.log(assignedStudents);
+
+  //checking to see if the mentor meets requirements to submit or not
   const [canSubmit, setCanSubmit] = useState(false);
 
   useEffect(() => {
     if (assignedStudents.length >= 3 && assignedStudents.length < 5) {
       setCanSubmit(true);
     }
-  }, []);
+  }, [assignedStudents.length]);
 
   const submitHandler = async () => {
-    console.log("click successfully");
     let mentorID = selectedMentor.mentorID;
-    console.log(mentorID);
+    //calling the backend to submit the studenst
     await submitMentor({ mentorID });
     navigate("/");
   };
+
+  // these functions filter students based on the clicked button
   const assignedFilterHandler = () => {
     setShowAssigned(true);
     setIsFiltered(true);
@@ -122,6 +123,7 @@ const Details = () => {
           )
         </div>
       ) : (
+        //if we have not selected a mentor but we are trying to access the details page
         <h1>please select a mentor first</h1>
       )}
     </>
