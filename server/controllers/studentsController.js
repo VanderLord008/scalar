@@ -12,7 +12,7 @@ export const getStudents = async (req, res) => {
 };
 
 export const createStudent = async (req, res) => {
-  console.log(req.body);
+  //creating a body out of the request
   const {
     name,
     studentID,
@@ -24,11 +24,10 @@ export const createStudent = async (req, res) => {
     submitted,
   } = req.body;
   let check = await studentModel.find({ studentID }).countDocuments();
-  console.log("check is" + check);
   if (check > 0) {
-    console.log("hiit");
     res.status(409);
   } else {
+    //creating new student
     const newStudent = new studentModel({
       name,
       studentID,
@@ -51,7 +50,7 @@ export const createStudent = async (req, res) => {
 };
 
 export const updateStudent = async (req, res) => {
-  console.log(req.body);
+  //getting all the variables out of the request body
   const {
     name,
     studentID,
@@ -67,8 +66,7 @@ export const updateStudent = async (req, res) => {
     .countDocuments();
   if (targetStudent === 0) {
     console.log(
-      "student not found" +
-        "this error is from controller/studentControllerhii.js"
+      "student not found" + "this error is from controller/studentController.js"
     );
   } else {
     let newStudent = await studentModel.updateOne(
@@ -79,7 +77,6 @@ export const updateStudent = async (req, res) => {
         mathsMarks: mathsMarks,
       }
     );
-    console.log("updation done");
     res.status(200).json(newStudent);
   }
 };

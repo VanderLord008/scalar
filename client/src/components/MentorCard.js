@@ -80,13 +80,16 @@ const MentorCard = ({ data }) => {
         </h2>
         <p>mentorID : {data.mentorID}</p>
       </div>
-      {!submitted ? (
-        <button onClick={() => selectionHandler({ data })}>login</button>
-      ) : (
-        <div className={styles.textArea}>
-          <h2>you have already submitted</h2>
-        </div>
-      )}
+
+      <div className={styles.buttonStyles}>
+        {!submitted ? (
+          <button onClick={() => selectionHandler({ data })}>login</button>
+        ) : (
+          <div className={styles.textArea}>
+            <h2>you have already submitted</h2>
+          </div>
+        )}
+      </div>
     </div>
   );
 };

@@ -16,12 +16,15 @@ h2 {
 
 
 .card {
-    width: 15rem;
-    height: 15rem;
+    width: 25em;
+    height: 20em;
     margin: 30px;
     border-radius: 30px;
     background: #e2ecee;
     box-shadow: 8px 8px 10px #bcc4c6, -8px -8px 10px #ffffff;
+    display: flex;
+    flex-direction: column;
+
 
 }
 
@@ -31,4 +34,7 @@ h2 {
     text-align: center;
     padding: 10px 25px;
     margin: 0 0 5px 0;
+    height: 70%;
 }
+
+.buttonStyles {}

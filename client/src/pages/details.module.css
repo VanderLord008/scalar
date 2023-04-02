@@ -35,8 +35,9 @@
 
 @media (max-width: 700px) {
     .studentContainer {
-        display: grid;
-        grid-template-columns: repeat(1, minmax(0, 1fr));
-        row-gap: 3rem;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
     }
 }

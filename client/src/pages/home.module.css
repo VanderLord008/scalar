@@ -1,3 +1,9 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
 .main {
     width: 100%;
 }
@@ -68,7 +74,7 @@ input {
 }
 
 
-@media (max-width: 900px) {
+@media (max-width:1100px) {
     .container {
         display: grid;
         grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -76,7 +82,7 @@ input {
     }
 }
 
-@media (max-width: 600px) {
+@media (max-width: 700px) {
     .container {
         display: grid;
         grid-template-columns: repeat(1, minmax(0, 1fr));
@@ -84,8 +90,22 @@ input {
     }
 }
 
-@media (max-width: 1000px) {
+@media (max-width: 1100px) {
     .formContainer {
         width: 750px;
+    }
+}
+
+@media (max-width: 800px) {
+    .formContainer {
+        width: 600px;
+        margin-left: 10%;
+    }
+}
+
+@media (max-width: 700px) {
+    .formContainer {
+        width: 500px;
+        margin-left: 10%;
     }
 }

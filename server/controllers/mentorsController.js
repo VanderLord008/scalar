@@ -8,7 +8,6 @@ import {
 export const getMentors = async (req, res) => {
   try {
     const allMentors = await mentorModel.find();
-    console.log("api hit successful");
     res.status(200).json(allMentors);
   } catch (error) {
     res.status(404).json({
@@ -29,7 +28,6 @@ export const createMentor = async (req, res) => {
   } = req.body;
   let check = await mentorModel.findOne({ mentorID }).countDocuments();
   if (check > 0) {
-    console.log("hiit");
     res.status(409);
   } else {
     const newMentor = new mentorModel({
@@ -53,17 +51,12 @@ export const createMentor = async (req, res) => {
 };
 
 export const assignMentor = async (req, res) => {
-  console.log(req.body);
   const { mentorID, studentID } = req.body;
-  console.log(mentorID);
-  console.log(studentID);
   let targetMentor = await mentorModel.findOne({ mentorID }).countDocuments();
   if (targetMentor === 0) {
     console.log(
-      "mentor not found" +
-        "this error is from controller/mentorsControllerhii.js"
+      "mentor not found" + "this error is from controller/mentorsController.js"
     );
-    //  res.json({ message:"mentor not found"+"this error is from controller/mentorsController.js" });
   } else {
     let targetMentor = await mentorModel.findOne({ mentorID });
     let allStudents = targetMentor.assignedStudents;
@@ -82,14 +75,11 @@ export const assignMentor = async (req, res) => {
 
 export const submitMentor = async (req, res) => {
   const { mentorID } = req.body;
-  console.log(req.body);
   let targetMentor = await mentorModel.findOne({ mentorID }).countDocuments();
   if (targetMentor === 0) {
     console.log(
-      "mentor not found" +
-        "this   error is from controller/mentorsController.js"
+      "mentor not found" + "this error is from controller/mentorsController.js"
     );
-    //res.status(500).json({ message:"mentor not found"+"this error is from controller/mentorsController.js" });
   } else {
     let targetMentor = await mentorModel.findOne({ mentorID });
     let allStudents = targetMentor.assignedStudents;
@@ -105,8 +95,6 @@ export const submitMentor = async (req, res) => {
 
 export const removeMentor = async (req, res) => {
   const { mentorID, studentID } = req.body;
-  console.log("bosy is");
-  console.log(req.body);
   let targetMentor = await mentorModel.find({ mentorID }).countDocuments();
   if (targetMentor === 0) {
     console.log(
