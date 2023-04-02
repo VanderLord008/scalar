@@ -43,7 +43,7 @@ export const submitStudents = async (mentorID) => {
   const doc = new jsPDF();
   for (let index = 0; index < targetStudents.length; index++) {
     // let name = targetStudents[index].name;
-    let studentID = targetStudents[index].studentID;
+    let studentID = targetStudents[index];
     // let physicsMarks = targetStudents[index].physicsMarks;
     // let chemistryMarks = targetStudents[index].chemistryMarks;
     // let mathsMarks = targetStudents[index].mathsMarks;
@@ -51,7 +51,7 @@ export const submitStudents = async (mentorID) => {
     doc.text(`id:${studentID}`, 10, 20 * (index + 2));
   }
   doc.save(`TES.pdf`);
-
+  console.log("pdf generated");
   return targetMentor;
 };
 

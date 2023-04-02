@@ -6,6 +6,7 @@ const initialState = {
   totalStudents: [],
 };
 
+//creating a student Slice for the redux store that will store total students, assigned students and unassigned students
 const studentSlice = createSlice({
   name: "students",
   initialState,

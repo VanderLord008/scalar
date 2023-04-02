@@ -5,6 +5,7 @@ const initialState = {
   allMentors: [],
 };
 
+//creating a slice for our redux store that will store all the mentors as well as our current selected mentor
 const mentorSlice = createSlice({
   name: "mentors",
   initialState,

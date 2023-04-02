@@ -4,15 +4,12 @@ import { addMentors } from "../store/mentorSlice";
 import { createMentor, fetchMentors, fetchStudents } from "../api";
 import { getTotalStudents } from "../store/studentSlice";
 import MentorCard from "../components/MentorCard";
-import { useNavigate } from "react-router-dom";
 
 import styles from "./home.module.css";
 
 const Home = () => {
   const dispatch = useDispatch();
   const [mentors, setMentors] = useState([]);
-  const navigate = useNavigate();
-
   const [createNewMentor, setCreateNewMentor] = useState(false);
   const [newMentorCreated, setNewMentorCreated] = useState(false);
   const [newMentorName, setNewMentorName] = useState("");
@@ -20,22 +17,22 @@ const Home = () => {
   const [newMentorMentorID, setNewMentorMentorID] = useState("");
   const [newMentorMentorEmailID, setNewMentorMentorEmailID] = useState("");
 
+  //we want to get the data from the backend as soon as the homepage loads
   useEffect(() => {
     async function fetchMentorData() {
       const { data } = await fetchMentors();
-      console.log(data);
       setMentors(data);
       dispatch(addMentors(data));
     }
     async function fetchStudentsData() {
       const { data } = await fetchStudents();
-      console.log(data);
       dispatch(getTotalStudents(data));
     }
     fetchMentorData();
     fetchStudentsData();
   }, [dispatch, newMentorCreated]);
 
+  //creating a new mentor
   const handleCreation = async (e) => {
     e.preventDefault();
     let newMentor = {
@@ -46,7 +43,6 @@ const Home = () => {
       assignedStudents: [],
       submitted: false,
     };
-    console.log(newMentor);
     await createMentor(newMentor);
     setNewMentorCreated(true);
     setNewMentorName("");
@@ -54,7 +50,6 @@ const Home = () => {
     setNewMentorMentorID("");
     setNewMentorMentorEmailID("");
     setCreateNewMentor(false);
-    //navigate("/");
   };
 
   return (
@@ -74,6 +69,7 @@ const Home = () => {
         )}
         {createNewMentor && (
           <div className={styles.formContainer}>
+            {/* form to create a new mentor */}
             <form
               action=""
               method="post"

@@ -1,42 +1,18 @@
 import React, { useEffect, useState } from "react";
-import styles from "./studentCard.module.css";
-import { addMentors, setMentor } from "../store/mentorSlice";
-import { getTotalStudents } from "../store/studentSlice";
-
 import { assignMentor, removeMentor } from "../api";
-import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
-import { fetchMentors, fetchStudents } from "../api";
-
 import { useNavigate } from "react-router-dom";
-import {
-  getAssignedStudents,
-  getRemainingStudents,
-} from "../store/studentSlice";
 import { updateStudent } from "../api";
+import styles from "./studentCard.module.css";
 
 const StudentCard = ({ data }) => {
   const navigate = useNavigate();
   let assigned = data.assigned;
-  const dispatch = useDispatch();
   const selectedMentor = useSelector((state) => state.mentors.currentMentor);
   let studentID = data.studentID;
   let mentorID = selectedMentor.mentorID;
 
-  const cleanup = () => {
-    function cleanupMentorData() {
-      dispatch(setMentor(null));
-      dispatch(addMentors([]));
-    }
-    function cleanupStudentsData() {
-      dispatch(getTotalStudents([]));
-      dispatch(getRemainingStudents([]));
-      dispatch(getAssignedStudents([]));
-    }
-    cleanupMentorData();
-    cleanupStudentsData();
-  };
-
+  //assigning the selected student to this mentor
   const assignHandler = async ({ data }) => {
     try {
       console.log("data is");
@@ -46,35 +22,30 @@ const StudentCard = ({ data }) => {
     } catch (error) {
       console.log(error);
     }
-    cleanup();
     navigate("/");
   };
+  //removing a selected student from the selected mentors list
   const removeHandler = async ({ data }) => {
     try {
-      console.log(data);
-      console.log("i am clicked");
-      console.log("men is");
-      console.log(mentorID);
       let studentID = data.studentID;
       await removeMentor({ mentorID, studentID });
     } catch (error) {
       console.log(error);
     }
-    cleanup();
     navigate("/");
   };
 
+  //updating the marks of the student
   const handleUpdation = async (e) => {
     e.preventDefault();
     let newStudent = { ...data };
+    //updating this students marks with new marks
     newStudent.chemistryMarks = chemistryMarks;
     newStudent.mathsMarks = mathsMarks;
     newStudent.physicsMarks = physicsMarks;
     if (assigned) {
       await updateStudent(newStudent);
       navigate("/");
-    } else {
-      console.log("not assigned");
     }
   };
 
@@ -87,14 +58,9 @@ const StudentCard = ({ data }) => {
   let assignedStudents = useSelector(
     (state) => state.mentors.currentMentor.assignedStudents
   );
-  //  const allStudents = useSelector((state) => state.students.totalStudents);
-
-  console.log("assigned");
-  console.log(assignedStudents);
 
   useEffect(() => {
     for (let it = 0; it < assignedStudents.length; it++) {
-      console.log("ran");
       if (data.studentID === assignedStudents[it]) {
         setIsMentor(true);
       }
@@ -102,7 +68,7 @@ const StudentCard = ({ data }) => {
     if (assignedStudents.length < 4) {
       setCanAssign(true);
     }
-  }, []);
+  }, [assignedStudents, data.studentID]);
 
   return (
     <div className={`${styles.card} ${styles.reactCard}`}>

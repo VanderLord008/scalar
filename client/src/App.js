@@ -9,7 +9,6 @@ const App = () => {
   return (
     <>
       <BrowserRouter>
-        {/* <NavBar /> */}
         <Routes>
           <Route path="/" exact element={<Home />}></Route>
           <Route path="/details" exact element={<Details />}></Route>
