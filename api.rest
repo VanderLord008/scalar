@@ -24,6 +24,13 @@ Content-Type: application/json
     "assigned": false,
     "submitted": false
 }
+###
+GET https://apiscaler.vercel.app/students HTTP/1.1
+Content-Type: application/json
+
+{
+
+}
 
 ###
 POST http://localhost:5000/students/update HTTP/1.1
